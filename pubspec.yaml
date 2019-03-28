@@ -19,6 +19,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  rxdart:
+  http:
+  shared_preferences:
+  connectivity:
 
   seed_encoder:
     path: ../seed_encoder
