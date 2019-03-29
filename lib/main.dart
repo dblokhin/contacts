@@ -31,7 +31,7 @@ class ContactApp extends StatelessWidget {
       ],
       title: 'Privacy Contacts',
       theme: alterTheme,
-      home: Contacts(),
+      home: SafeArea(child: Contacts()),
     );
   }
 }
