@@ -1,5 +1,6 @@
 import 'package:contacts/models/contacts.dart';
 import 'package:contacts/screens/error.dart';
+import 'package:contacts/screens/wizard.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:seed_encoder/seed_encoder.dart';
@@ -21,25 +22,32 @@ class AppScreen {
   }
 
   AppScreen() {
-    SharedPreferences.getInstance()
-        .then((pref) {
-          // init seed
-          final seed = pref.get(seedStoreKey);
-          return SeedEncoder.applySeed(seed);
-        })
-        .then((_) => openBook())
-        .catchError((e) => openError(e));
+    state.add(AppInitState());
+
+    SharedPreferences.getInstance().then((pref) {
+      final seed = pref.get(seedStoreKey);
+      if (seed == null) return openSeedWizard();
+
+      SeedEncoder.applySeed(seed).then((_) => openBook());
+    }).catchError((e) => openError(e));
   }
 
-  // screen navigation
+  /// screen navigation
+  /// opens book screen
   openBook() {
     _screenBook = _screenBook ?? AppBookState();
     state.add(_screenBook);
   }
 
+  /// opens error screen
   openError(e) {
     print('initialization app error: $e');
     state.add(AppErrorState(e));
+  }
+
+  /// opens seed wizard screen
+  openSeedWizard() {
+    state.add(AppSeedWizardState());
   }
 }
 
@@ -56,6 +64,10 @@ class AppErrorState extends AppScreenState {
   final Widget screen;
 
   AppErrorState(this.e) : screen = ErrorScreen(e);
+}
+
+class AppSeedWizardState extends AppScreenState {
+  final Widget screen = WizardScreen();
 }
 
 class AppBookState extends AppScreenState {

@@ -1,3 +1,4 @@
+import 'package:contacts/interfaces/localization.dart';
 import 'package:contacts/models/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -23,14 +24,15 @@ class ContactApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       showSemanticsDebugger: false,
       supportedLocales: [
-        const Locale('ru', 'RU'),
+        const Locale('en', ''),
       ],
       localizationsDelegates: [
+        const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       title: 'Privacy Contacts',
-      theme: alterTheme,
+      theme: firstTheme,
       home: SafeArea(child: Contacts()),
     );
   }
