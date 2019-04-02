@@ -49,6 +49,11 @@ class AppScreen {
   openSeedWizard() {
     state.add(AppSeedWizardState());
   }
+
+  openSeedGenerationScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MyRoute(builder: (ctx) => WizardCreateSeedScreen()));
+  }
 }
 
 class AppScreenState {

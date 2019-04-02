@@ -36,6 +36,26 @@ class AppLocalizations {
   String get createNewSeed {
     return _localizedValues[locale.languageCode]['createNewSeed'];
   }
+
+  String get seedWizard {
+    return _localizedValues[locale.languageCode]['seedWizard'];
+  }
+
+  String get recreate {
+    return _localizedValues[locale.languageCode]['recreate'];
+  }
+
+  String get next {
+    return _localizedValues[locale.languageCode]['next'];
+  }
+
+  String get yourSeed {
+    return _localizedValues[locale.languageCode]['yourSeed'];
+  }
+
+  String get copySeed {
+    return _localizedValues[locale.languageCode]['copySeed'];
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -58,9 +78,14 @@ final _localizedData = '''
 	"en": {
 		"welcome": "Welcome",
 		"seedIntro": "Seed phrase is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English",
-		"haveYouSeed": "Have you a seed?",
+		"haveYouSeed": "Do you have a seed-phrase?",
 		"alreadyHaveSeed": "Yes, I have one",
-		"createNewSeed": "Create new seed"
+		"createNewSeed": "No, create new",
+		"seedWizard": "Seed Wizard",
+		"recreate": "Recreate",
+		"next": "Next",
+		"yourSeed": "Your new seed-phrase",
+		"copySeed": "Copy seed to clipboard"
 	},
 	"ru": {}
 }

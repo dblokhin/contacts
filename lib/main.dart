@@ -8,12 +8,12 @@ void main() => runApp(ContactApp());
 final firstTheme = ThemeData(
   // Define the default Brightness and Colors
   primaryColor: Colors.lightBlue,
-  accentColor: Colors.teal,
+  accentColor: Colors.amber[800],
 );
 
 final alterTheme = ThemeData(
   // Define the default Brightness and Colors
-  primaryColor: Colors.orange,
+  primaryColor: Colors.amber[800],
   accentColor: Colors.blue,
 );
 
