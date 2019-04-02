@@ -9,15 +9,16 @@ class WizardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Privacy Contacts')),
       body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints.tightForFinite(),
+        child: Container(
+          constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height - 80),
           child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(height: 20),
@@ -27,21 +28,23 @@ class WizardScreen extends StatelessWidget {
                       SizedBox(height: 20),
                     ],
                   ),
-                  Column(
-                    //crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Divider(),
-                      SizedBox(height: 20),
-                      Text(
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
                         lzn.haveYouSeed,
                         style: Theme.of(context).textTheme.subhead,
                       ),
-                      SizedBox(height: 20),
-                      _actions(context),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    SizedBox(height: 20),
+                    _actions(context),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -71,13 +74,14 @@ class WizardScreen extends StatelessWidget {
     final lzn = AppLocalizations.of(context);
 
     return ButtonBar(
-      alignment: MainAxisAlignment.spaceAround,
+      alignment: MainAxisAlignment.end,
       children: <Widget>[
         RaisedButton(
           child: Text(lzn.alreadyHaveSeed),
           onPressed: () => print('have'),
         ),
         RaisedButton(
+          color: Colors.green,
           child: Text(lzn.createNewSeed),
           onPressed: () => print('new seed'),
         )
