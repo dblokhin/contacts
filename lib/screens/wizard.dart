@@ -1,5 +1,6 @@
 import 'package:contacts/interfaces/localization.dart';
 import 'package:contacts/models/screen.dart';
+import 'package:contacts/widgets/paragraph.dart';
 import 'package:flutter/material.dart';
 
 class WizardScreen extends StatelessWidget {
@@ -23,9 +24,9 @@ class WizardScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       SizedBox(height: 20),
-                      _topTitle(context),
+                      _topSection(context),
                       SizedBox(height: 20),
-                      _intro(context),
+                      _introSection(context),
                       SizedBox(height: 20),
                     ],
                   ),
@@ -53,7 +54,7 @@ class WizardScreen extends StatelessWidget {
     );
   }
 
-  Widget _topTitle(BuildContext context) {
+  Widget _topSection(BuildContext context) {
     final lzn = AppLocalizations.of(context);
 
     return Text(
@@ -62,13 +63,10 @@ class WizardScreen extends StatelessWidget {
     );
   }
 
-  Widget _intro(BuildContext context) {
+  Widget _introSection(BuildContext context) {
     final lzn = AppLocalizations.of(context);
 
-    return Text(
-      lzn.seedIntro,
-      textAlign: TextAlign.justify,
-    );
+    return Paragraph(lzn.seedIntro);
   }
 
   Widget _actions(BuildContext context) {

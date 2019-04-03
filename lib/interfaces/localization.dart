@@ -77,7 +77,7 @@ final _localizedData = '''
 {
 	"en": {
 		"welcome": "Welcome",
-		"seedIntro": "Seed phrase is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English",
+		"seedIntro": "Privacy Contacts App is not about security your data — the main goal is keep your privacy with only you. Backed by AES encryption the App syncs only encrypted data. So it guaranties you that your privacy data is not collected, processed and analysed while storing in cloud. \\nUsing the same secret seed-phrase you can synchronize your contacts data across many devices without trusting service provider. \\nThe project is open source and you can audit every line of code. \\nYou must take care to keep your seed-phrase in strongly secret and use App in safe environment.",
 		"haveYouSeed": "Do you have a seed-phrase?",
 		"alreadyHaveSeed": "Yes, I have one",
 		"createNewSeed": "No, create new",
