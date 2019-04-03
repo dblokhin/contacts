@@ -44,7 +44,7 @@ class ContactsModel {
 
   // Creates Contact
   Contact create(String name, {String lastName}) {
-    return Contact.New(name)..lastName = lastName;
+    return Contact.newContact(name)..lastName = lastName;
   }
 
   // adds new or updates existing contact
@@ -74,7 +74,7 @@ class Contact {
 
   Contact({this.id, this.name, this.lastName});
 
-  static Contact New(String name) {
+  static Contact newContact(String name) {
     final uuid = Uuid();
     return Contact(
       id: uuid.v4(),
