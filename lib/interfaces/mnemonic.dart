@@ -22,7 +22,7 @@ class Mnemonic {
     return _mnemonic;
   }
 
-  Mnemonic({EntropySize size = EntropySize.s256}) : _size = size {
+  Mnemonic({EntropySize size = EntropySize.s128}) : _size = size {
     _checksumBits = _entropyBits ~/ 32;
 
     final List<int> entropy = _createEntropy();
