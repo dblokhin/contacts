@@ -1,7 +1,9 @@
 import 'package:contacts/interfaces/localization.dart';
+import 'package:contacts/models/mnemonic.dart';
 import 'package:contacts/models/screen.dart';
 import 'package:contacts/widgets/paragraph.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class WizardScreen extends StatelessWidget {
   @override
@@ -99,7 +101,7 @@ class WizardCreateSeedScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height - 80),
+              minHeight: MediaQuery.of(context).size.height - 80),
           child: Card(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,6 +142,28 @@ class WizardCreateSeedScreen extends StatelessWidget {
   }
 
   Widget _seedSection(BuildContext context) {
+    mnemonicModel.request();
+
+    return StreamBuilder<MnemonicGeneratorState>(
+      stream: mnemonicModel.state,
+      initialData: MnemonicGeneratorLoadingState(),
+      builder: (ctx, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data;
+
+          if (data is MnemonicGeneratorResultState) {
+            return _mnemonic(ctx, data.mnemonic);
+          }
+
+          return Center(child: CircularProgressIndicator());
+        }
+
+        return Text('unexcepted error #313');
+      },
+    );
+  }
+
+  Widget _mnemonic(BuildContext context, String seed) {
     final lzn = AppLocalizations.of(context);
 
     return Column(
@@ -149,7 +173,7 @@ class WizardCreateSeedScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           constraints: BoxConstraints(minWidth: double.infinity),
           child: Text(
-            "some seed content very alot things happy nation butty some needs gotten applicant",
+            seed,
             style: Theme.of(context).textTheme.headline,
             textAlign: TextAlign.center,
           ),
@@ -159,7 +183,9 @@ class WizardCreateSeedScreen extends StatelessWidget {
           leading: Icon(Icons.content_copy),
           title: Text(lzn.copySeed),
           onTap: () {
-            print('copied');
+            Clipboard.setData(ClipboardData(text: seed));
+            Scaffold.of(context)
+                .showSnackBar(SnackBar(content: Text('Mnemonic seed copied')));
           },
         ),
       ],
@@ -174,7 +200,7 @@ class WizardCreateSeedScreen extends StatelessWidget {
       children: <Widget>[
         RaisedButton(
           child: Text(lzn.recreate),
-          onPressed: () => print('new click'),
+          onPressed: () => mnemonicModel.request(),
         ),
         RaisedButton(
           color: Colors.amber[800],
