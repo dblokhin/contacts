@@ -107,7 +107,7 @@ class WizardCreateSeedScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 _topSection(context),
-                _seedSection(context),
+                MnemonicCode(),
                 _actionsSection(context),
               ],
             ),
@@ -127,7 +127,7 @@ class WizardCreateSeedScreen extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 20),
           Text(
-            lzn.yourSeed,
+            lzn.newSeed,
             style: Theme.of(context).textTheme.headline,
             textAlign: TextAlign.start,
           ),
@@ -141,7 +141,29 @@ class WizardCreateSeedScreen extends StatelessWidget {
     );
   }
 
-  Widget _seedSection(BuildContext context) {
+  Widget _actionsSection(BuildContext context) {
+    final lzn = AppLocalizations.of(context);
+
+    return ButtonBar(
+      alignment: MainAxisAlignment.end,
+      children: <Widget>[
+        RaisedButton(
+          child: Text(lzn.recreate),
+          onPressed: () => mnemonicModel.request(),
+        ),
+        RaisedButton(
+          color: Colors.amber[800],
+          child: Text(lzn.next),
+          onPressed: () => print('accept'),
+        )
+      ],
+    );
+  }
+}
+
+class MnemonicCode extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     mnemonicModel.request();
 
     return StreamBuilder<MnemonicGeneratorState>(
@@ -158,6 +180,8 @@ class WizardCreateSeedScreen extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
 
+        // never rich
+        assert(false);
         return Text('unexcepted error #313');
       },
     );
@@ -185,28 +209,9 @@ class WizardCreateSeedScreen extends StatelessWidget {
           onTap: () {
             Clipboard.setData(ClipboardData(text: seed));
             Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text('Mnemonic seed copied')));
+                .showSnackBar(SnackBar(content: Text(lzn.copiedSeed)));
           },
         ),
-      ],
-    );
-  }
-
-  Widget _actionsSection(BuildContext context) {
-    final lzn = AppLocalizations.of(context);
-
-    return ButtonBar(
-      alignment: MainAxisAlignment.end,
-      children: <Widget>[
-        RaisedButton(
-          child: Text(lzn.recreate),
-          onPressed: () => mnemonicModel.request(),
-        ),
-        RaisedButton(
-          color: Colors.amber[800],
-          child: Text(lzn.next),
-          onPressed: () => print('accept'),
-        )
       ],
     );
   }

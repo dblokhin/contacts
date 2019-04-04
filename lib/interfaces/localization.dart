@@ -49,12 +49,16 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['next'];
   }
 
-  String get yourSeed {
-    return _localizedValues[locale.languageCode]['yourSeed'];
+  String get newSeed {
+    return _localizedValues[locale.languageCode]['newSeed'];
   }
 
   String get copySeed {
     return _localizedValues[locale.languageCode]['copySeed'];
+  }
+
+  String get copiedSeed {
+    return _localizedValues[locale.languageCode]['copiedSeed'];
   }
 }
 
@@ -84,8 +88,9 @@ final _localizedData = '''
 		"seedWizard": "Seed Wizard",
 		"recreate": "Recreate",
 		"next": "Next",
-		"yourSeed": "Your new seed-phrase",
-		"copySeed": "Copy seed to clipboard"
+		"newSeed": "New seed-phrase",
+		"copySeed": "Copy seed to clipboard",
+		"copiedSeed": "Copied"
 	},
 	"ru": {}
 }
