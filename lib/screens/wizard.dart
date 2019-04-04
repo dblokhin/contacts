@@ -68,7 +68,7 @@ class WizardScreen extends StatelessWidget {
   Widget _introSection(BuildContext context) {
     final lzn = AppLocalizations.of(context);
 
-    return Paragraph(lzn.seedIntro);
+    return Paragraph(lzn.wizardIntro);
   }
 
   Widget _actions(BuildContext context) {
