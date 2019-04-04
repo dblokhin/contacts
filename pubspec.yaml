@@ -27,6 +27,7 @@ dependencies:
   shared_preferences:
   connectivity:
   uuid:
+  crypto:
 
   seed_encoder:
     path: ../seed_encoder
