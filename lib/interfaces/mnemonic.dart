@@ -1,5 +1,5 @@
 // Copyright 2019 The Privacy App Developers. All rights reserved.
-// Use of this source code is governed by a GNU GENERAL PUBLIC LICENSE v3
+// Use of this source code is governed by a MIT LICENSE
 // Also read license file that can be found in the LICENSE file.
 
 import 'dart:math';
