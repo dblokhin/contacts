@@ -2,6 +2,7 @@
 // Use of this source code is governed by a MIT LICENSE
 // Also read license file that can be found in the LICENSE file.
 
+import 'package:contacts/widgets/popular.dart';
 import 'package:flutter/material.dart';
 
 class ErrorScreen extends StatelessWidget {
@@ -11,6 +12,6 @@ class ErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text(e.toString())));
+    return Scaffold(body: CenterText(e.toString()));
   }
 }

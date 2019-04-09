@@ -4,6 +4,7 @@
 
 import 'package:contacts/interfaces/localization.dart';
 import 'package:contacts/models/screen.dart';
+import 'package:contacts/widgets/popular.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -80,9 +81,7 @@ class _ContactsState extends State<Contacts> with WidgetsBindingObserver {
         }
 
         return Scaffold(
-          body: Center(
-            child: Text('Something went wrong: ${snapshot.error}'),
-          ),
+          body: CenterText('Unexpeced error: ${snapshot.error.toString()}'),
         );
       },
     );

@@ -4,6 +4,7 @@
 
 import 'package:contacts/models/contacts.dart';
 import 'package:contacts/models/screen.dart';
+import 'package:contacts/widgets/popular.dart';
 import 'package:flutter/material.dart';
 
 class BookScreen extends StatelessWidget {
@@ -71,11 +72,11 @@ class BookScreen extends StatelessWidget {
 
           if (data is BookErrorState) {
             print('book: print error ${data.error}');
-            Center(child: Text(data.error.toString()));
+            CenterText('Unexpeced error: ${snapshot.error.toString()}');
           }
         }
 
-        return Center(child: Text('unexpected error'));
+        return CenterText('Unexpeced error');
       },
     );
   }
