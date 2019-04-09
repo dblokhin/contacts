@@ -89,7 +89,7 @@ final _localizedData = '''
 {
 	"en": {
 		"welcome": "Welcome",
-		"wizardIntro": "Privacy Contacts App is not about security your data — the main goal is keep your privacy with only you. Backed by AES encryption the App syncs only encrypted data. So it guaranties you that your privacy data is not collected, processed and analysed while storing in cloud. \\nUsing the same secret seed-phrase you can synchronize your contacts data across many devices without trusting service provider. \\nThe project is open source and you can audit every line of code. \\nYou must take care to keep your seed-phrase in strongly secret and use App in safe environment.",
+		"wizardIntro": "The main Privacy Contacts App's goal is keep your privacy with only you. Backed by AES encryption the App syncs only encrypted data. So it guaranties you that your privacy data is not collected, processed and analysed while storing in the cloud. \\nUsing the same secret seed-phrase you can synchronize your contacts data across many devices without trusting service provider. \\nThe project is open source and you can audit every line of code. \\nYou must take care to keep your seed-phrase in strongly secret and use the App in safe environment.",
 		"seedIntro": "Your encryption secret key is derived from special mnemonic code. \\nA mnemonic code or sentence is superior for human interaction compared to the handling of raw binary or hexadecimal representations of secret keys. The sentence could be easy written on paper.",
 		"haveYouSeed": "Do you have a seed-phrase?",
 		"alreadyHaveSeed": "Yes, I have one",
