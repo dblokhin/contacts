@@ -9,33 +9,24 @@ final _rand = Random.secure();
 
 enum EntropySize { s128, s160, s192, s224, s256 }
 
-/// we will use the bitcoin bip39 spec for mnemonic seed:
+/// We will use the bitcoin bip39 spec for mnemonic seed:
 /// https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
 /// Class generates new mnemonic seed
-class Mnemonic {
-  final EntropySize _size;
-
-  int _checksumBits;
+class MnemonicGenerator {
+  final EntropySize size;
   String _mnemonic;
 
-  String get mnemonic {
-    return _mnemonic;
-  }
+  MnemonicGenerator({this.size = EntropySize.s128}) {
+    final len = entropyBits ~/ 8;
+    final entropy = List.generate(len, (_) => _rand.nextInt(0xff));
 
-  Mnemonic({EntropySize size = EntropySize.s128}) : _size = size {
-    _checksumBits = _entropyBits ~/ 32;
-
-    final List<int> entropy = _createEntropy();
     _mnemonic = _mnemonicFromEntropy(entropy);
   }
 
-  List<int> _createEntropy() {
-    return List.generate(_entropyBits ~/ 8, (_) => _rand.nextInt(255),
-        growable: true);
-  }
+  String get mnemonic => _mnemonic;
 
   String _mnemonicFromEntropy(List<int> entropy) {
-    BigInt value = entropy.fold(
+    BigInt value = entropy.fold<BigInt>(
         BigInt.from(0), (acc, n) => (acc << 8) + BigInt.from(n & 0xff));
 
     // append checksum
@@ -43,7 +34,7 @@ class Mnemonic {
     final bOne = BigInt.from(1);
     final int checksum = (digest.bytes.first & 0xff);
 
-    for (int i = 0; i < (8 - _checksumShift); i++) {
+    for (int i = 0; i < (8 - checksumShift); i++) {
       value = value << 1;
       if ((checksum & 1 << (7 - i)) > 0) {
         value = value + bOne;
@@ -51,9 +42,9 @@ class Mnemonic {
     }
 
     // convert to words
-    final List<String> result = [];
+    final result = List<String>();
 
-    int bits = _entropyBits + _checksumBits;
+    int bits = entropyBits + checksumBits;
     while (bits > 0) {
       int shift = bits - 11;
 
@@ -69,8 +60,10 @@ class Mnemonic {
     return result.join(' ');
   }
 
-  int get _entropyBits {
-    switch (_size) {
+  int get checksumBits => entropyBits ~/ 32;
+
+  int get entropyBits {
+    switch (size) {
       case EntropySize.s128:
         return 128;
       case EntropySize.s160:
@@ -82,12 +75,12 @@ class Mnemonic {
       case EntropySize.s256:
         return 256;
       default:
-        throw 'error: entropy size is not set';
+        throw 'error: invalid entropy size';
     }
   }
 
-  int get _checksumShift {
-    switch (_size) {
+  int get checksumShift {
+    switch (size) {
       case EntropySize.s128:
         return 4;
       case EntropySize.s160:
@@ -100,7 +93,7 @@ class Mnemonic {
         return 0;
 
       default:
-        throw 'error: entropy size is not set';
+        throw 'error: invalid entropy size';
     }
   }
 }

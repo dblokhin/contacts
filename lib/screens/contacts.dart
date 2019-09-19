@@ -41,8 +41,9 @@ class ContactsAppBar extends StatelessWidget {
           height: 24,
           color: appModel.themeModel.primaryColor,
         ),
+        const SizedBox(height: 4),
         Padding(
-          padding: const EdgeInsets.only(top: 4, left: 4, right: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 4),
           child: AppBar(
             primary: false,
             title: Text(searchFieldLabel),
