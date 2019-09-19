@@ -3,26 +3,28 @@
 // Also read license file that can be found in the LICENSE file.
 
 import 'package:contacts/interfaces/localization.dart';
-import 'package:contacts/models/screen.dart';
-import 'package:contacts/widgets/popular.dart';
+import 'package:contacts/models/app.dart';
+import 'package:contacts/screens/contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(ContactApp());
+Future<void> main() async {
+  await appModel.initialize();
 
-final firstTheme = ThemeData(
-  // Define the default Brightness and Colors
-  primaryColor: Colors.lightBlue,
-  accentColor: Colors.amber[800],
-);
+  final app = const ContactApp(
+    child: ContactsScreen(),
+  );
 
-final alterTheme = ThemeData(
-  // Define the default Brightness and Colors
-  primaryColor: Colors.amber[800],
-  accentColor: Colors.blue,
-);
+  runApp(app);
+}
 
 class ContactApp extends StatelessWidget {
+  final Widget child;
+
+  const ContactApp({Key key, @required this.child})
+      : assert(child != null),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,53 +39,10 @@ class ContactApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       title: 'Privacy Contacts',
-      theme: firstTheme,
-      home: SafeArea(child: Contacts()),
-    );
-  }
-}
-
-class Contacts extends StatefulWidget {
-  @override
-  _ContactsState createState() => _ContactsState();
-}
-
-class _ContactsState extends State<Contacts> with WidgetsBindingObserver {
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    // if state RESUMED (back to foreground)
-    if (state == AppLifecycleState.resumed) {
-      // do something
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: appScreen.state,
-      initialData: AppInitState(),
-      builder: (BuildContext ctx, AsyncSnapshot<AppScreenState> snapshot) {
-        if (snapshot.hasData) {
-          final state = snapshot.data;
-          return state.screen;
-        }
-
-        return Scaffold(
-          body: CenterText('Unexpeced error: ${snapshot.error.toString()}'),
-        );
-      },
+      theme: appModel.themeModel.theme,
+      darkTheme: appModel.themeModel.darkTheme,
+      themeMode: ThemeMode.system,
+      home: child,
     );
   }
 }

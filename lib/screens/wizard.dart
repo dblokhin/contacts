@@ -4,7 +4,6 @@
 
 import 'package:contacts/interfaces/localization.dart';
 import 'package:contacts/models/mnemonic.dart';
-import 'package:contacts/models/screen.dart';
 import 'package:contacts/widgets/paragraph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -88,7 +87,7 @@ class WizardScreen extends StatelessWidget {
         RaisedButton(
           color: Colors.amber[800],
           child: Text(lzn.createNewSeed),
-          onPressed: () => appScreen.openSeedGenerationScreen(context),
+          onPressed: () => print('open contact'),
         )
       ],
     );

@@ -1,0 +1,8 @@
+introduce app:
+
+Privacy Contacts App is not about security your data — the main goal is keep your privacy with only you. Backed by AES encryption the App syncs only encrypted data. So it guaranties you that your privacy data is not collected, processed and analysed while storing in cloud.
+Using the same secret seed-phrase you can synchronize your contacts data across many devices without trusting service provider.
+
+The project is open source and you can audit every line of code.
+
+You must take care to keep your seed-phrase in strongly secret and use App in safe environment.
