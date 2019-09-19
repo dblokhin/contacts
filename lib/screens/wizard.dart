@@ -3,7 +3,6 @@
 // Also read license file that can be found in the LICENSE file.
 
 import 'package:contacts/interfaces/localization.dart';
-import 'package:contacts/models/mnemonic.dart';
 import 'package:contacts/widgets/paragraph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

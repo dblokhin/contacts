@@ -26,13 +26,8 @@ dependencies:
   rxdart:
   http:
   shared_preferences:
-  connectivity:
   uuid:
-  crypto:
-
-  seed_encoder:
-    path: ../seed_encoder
-
+  crypto: ^2.1.3
 
 dev_dependencies:
   flutter_test:
