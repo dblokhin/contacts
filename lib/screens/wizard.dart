@@ -84,31 +84,22 @@ class _WizardStep1 extends StatelessWidget {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 16),
-                CenterText(
-                  lzn.welcome,
-                  style: Theme.of(context).textTheme.headline,
-                ),
-                SizedBox(height: 16),
-                Paragraph(lzn.wizardIntro),
-              ],
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: <Widget>[
+            const SizedBox(height: 48),
+            CenterText(
+              lzn.welcome,
+              style: Theme.of(context).textTheme.headline,
             ),
-          ),
+            const SizedBox(height: 32),
+            Paragraph(lzn.wizardIntro),
+          ],
         ),
       ),
       persistentFooterButtons: <Widget>[
         RaisedButton(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 48),
-            child: Text(lzn.next),
-          ),
+          child: Text(lzn.next),
           onPressed: next,
         )
       ],
