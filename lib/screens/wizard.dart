@@ -54,11 +54,11 @@ class _SeedWizardScreenState extends State<SeedWizardScreen> {
         );
       case 1:
         return _WizardStep2(
-          back: () => setState(() {
-            wizardStep--;
-          }),
-          next: () => setState(() {
+          action1: () => setState(() {
             wizardStep++;
+          }),
+          action2: () => setState(() {
+            wizardStep += 2;
           }),
         );
     }
@@ -80,7 +80,7 @@ class _WizardStep1 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Privace Contacts Wizard'),
+        title: Text('Privacy Contacts Wizard'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -109,31 +109,38 @@ class _WizardStep1 extends StatelessWidget {
 
 /// Ask user a question screen: Have you a seed-phrase?
 class _WizardStep2 extends StatelessWidget {
-  final void Function() back;
-  final void Function() next;
+  final void Function() action1;
+  final void Function() action2;
 
-  const _WizardStep2({Key key, @required this.back, @required this.next})
+  const _WizardStep2({Key key, @required this.action1, @required this.action2})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    /*
+    final lzn = AppLocalizations.of(context);
 
-                CenterText(
-                  lzn.haveYouSeed,
-                  style: Theme.of(context).textTheme.headline,
-                ),
-
-    RaisedButton(
-      child: Text(lzn.alreadyHaveSeed),
-      onPressed: back,
-    ),
-    RaisedButton(
-    color: Colors.amber[800],
-    child: Text(lzn.createNewSeed),
-    onPressed: next,
-    )*/
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Privacy Contacts Wizard'),
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: CenterText(
+          lzn.haveYouSeed,
+          style: Theme.of(context).textTheme.headline,
+        ),
+      ),
+      persistentFooterButtons: <Widget>[
+        RaisedButton(
+          child: Text(lzn.alreadyHaveSeed.toUpperCase()),
+          onPressed: action1,
+        ),
+        RaisedButton(
+          child: Text(lzn.createNewSeed.toUpperCase()),
+          onPressed: action2,
+        ),
+      ],
+    );
   }
 }
 
