@@ -13,8 +13,7 @@ class AppLocalizations {
   Map<String, Map<String, dynamic>> _localizedValues;
 
   AppLocalizations(this.locale) {
-    final Map<String, dynamic> input = json.decode(_localizedData);
-    _localizedValues = input.cast<String, Map<String, dynamic>>();
+    _localizedValues = _localizedData;
   }
 
   static AppLocalizations of(BuildContext context) {
@@ -85,22 +84,22 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   bool shouldReload(AppLocalizationsDelegate old) => false;
 }
 
-final _localizedData = '''
-{
-	"en": {
-		"welcome": "Welcome",
-		"wizardIntro": "The main Privacy Contacts App's goal is keep your privacy with only you. Backed by AES encryption the App syncs only encrypted data. So it guaranties you that your privacy data is not collected, processed and analysed while storing in the cloud. \\nUsing the same secret seed-phrase you can synchronize your contacts data across many devices without trusting service provider. \\nThe project is open source and you can audit every line of code. \\nYou must take care to keep your seed-phrase in strongly secret and use the App in safe environment.",
-		"seedIntro": "Your encryption secret key is derived from special mnemonic code. \\nA mnemonic code or sentence is superior for human interaction compared to the handling of raw binary or hexadecimal representations of secret keys. The sentence could be easy written on paper.",
-		"haveYouSeed": "Do you have a seed-phrase?",
-		"alreadyHaveSeed": "Yes, I have one",
-		"createNewSeed": "No, create new",
-		"seedWizard": "Seed Wizard",
-		"recreate": "Recreate",
-		"next": "Next",
-		"newSeed": "New seed-phrase",
-		"copySeed": "Copy seed to clipboard",
-		"copiedSeed": "Copied"
-	},
-	"ru": {}
-}
-''';
+const Map<String, Map<String, dynamic>> _localizedData = {
+  "en": {
+    "welcome": "Welcome!",
+    "wizardIntro":
+        "The main Privacy Contacts App's goal is keeping your privacy with only you. Backed by AES encryption the App syncs only encrypted data. So it guaranties you that your privacy data is not collected, processed and analysed while storing in the cloud. \nUsing the same secret seed-phrase you can synchronize your contacts data across many devices without trusting service provider. \nThe project is Open Source and you can audit every line of code. \nYou must take care to keep your seed-phrase in strongly secret and use the App in safe environment.",
+    "seedIntro":
+        "Your encryption secret key is derived from special mnemonic code. \nA mnemonic code or sentence is superior for human interaction compared to the handling of raw binary or hexadecimal representations of secret keys. The sentence could be easy written on paper.",
+    "haveYouSeed": "Do you have a seed-phrase?",
+    "alreadyHaveSeed": "Yes, I have one",
+    "createNewSeed": "No, create new",
+    "seedWizard": "Seed Wizard",
+    "recreate": "Recreate",
+    "next": "Next",
+    "newSeed": "New seed-phrase",
+    "copySeed": "Copy seed to clipboard",
+    "copiedSeed": "Copied"
+  },
+  "ru": {}
+};
