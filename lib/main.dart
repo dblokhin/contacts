@@ -5,14 +5,20 @@
 import 'package:contacts/interfaces/localization.dart';
 import 'package:contacts/models/app.dart';
 import 'package:contacts/screens/contacts.dart';
+import 'package:contacts/screens/wizard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // app initial
   await appModel.initialize();
 
   final app = const ContactApp(
-    child: ContactsScreen(),
+    child: SeedRequired(
+      child: ContactsScreen(),
+    ),
   );
 
   runApp(app);
