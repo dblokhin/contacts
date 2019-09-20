@@ -20,15 +20,16 @@ class ThemeModel {
         ),
       ).copyWith(
         accentColor: Colors.red,
-      );
-  /*primaryColor: Colors.orange,
-        primaryColorLight: Colors.orange[50],
-        primaryColorDark: primaryColorDark,
-        accentColor: accentColor,
+        buttonBarTheme: ButtonBarThemeData(
+          buttonMinWidth: 120,
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: primaryColor,
+        ),
         iconTheme: IconThemeData(color: primaryColorDark),
         chipTheme: ChipThemeData.fromDefaults(
-          primaryColor: accentColor,
-          secondaryColor: accentColor,
+          primaryColor: secondaryColor,
+          secondaryColor: secondaryColor,
           labelStyle: TextStyle(fontSize: 12),
         ),
         tooltipTheme: TooltipThemeData(
@@ -37,7 +38,8 @@ class ThemeModel {
             borderRadius: BorderRadius.circular(5),
           ),
         ),
-        toggleButtonsTheme: ToggleButtonsThemeData(
+      );
+  /* toggleButtonsTheme: ToggleButtonsThemeData(
           color: Colors.black87,
           selectedColor: Colors.black,
           borderColor: primaryColorMiddleLight,
