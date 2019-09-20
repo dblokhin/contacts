@@ -22,6 +22,7 @@ class Paragraph extends StatelessWidget {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: list.map(p).toList(),
     );
   }

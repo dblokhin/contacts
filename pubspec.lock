@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.11"
-  connectivity:
-    dependency: "direct main"
-    description:
-      name: connectivity
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.2"
   convert:
     dependency: transitive
     description:
@@ -156,13 +149,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.21.0"
-  seed_encoder:
-    dependency: "direct main"
-    description:
-      path: "../seed_encoder"
-      relative: true
-    source: path
-    version: "0.0.4"
   shared_preferences:
     dependency: "direct main"
     description:

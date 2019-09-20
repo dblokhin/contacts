@@ -7,7 +7,6 @@ import 'dart:typed_data';
 
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:seed_encoder/seed_encoder.dart';
 import 'package:uuid/uuid.dart';
 
 final contactsModel = ContactsModel();
@@ -43,7 +42,9 @@ class ContactsModel {
   // Raw data is json formatted contacts
   Future<Uint8List> _getRawContactsData(SharedPreferences pref) {
     final userEncryptedData = pref.getString(contactsStorekey);
-    return SeedEncoder.decode(base64.decode(userEncryptedData));
+
+    //return SeedEncoder.decode(base64.decode(userEncryptedData));
+    return null;
   }
 
   // Creates Contact

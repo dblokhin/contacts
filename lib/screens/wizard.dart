@@ -3,93 +3,146 @@
 // Also read license file that can be found in the LICENSE file.
 
 import 'package:contacts/interfaces/localization.dart';
-import 'package:contacts/widgets/paragraph.dart';
+import 'package:contacts/models/app.dart';
+import 'package:contacts/ui/general.dart';
+import 'package:contacts/ui/paragraph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class WizardScreen extends StatelessWidget {
+class SeedRequired extends StatefulWidget {
+  final Widget child;
+
+  const SeedRequired({Key key, @required this.child})
+      : assert(child != null),
+        super(key: key);
+
+  @override
+  _SeedRequiredState createState() => _SeedRequiredState();
+}
+
+class _SeedRequiredState extends State<SeedRequired> {
+  @override
+  Widget build(BuildContext context) {
+    final isSeedExists = (appModel.seed == null || appModel.seed.length == 0);
+
+    return (isSeedExists)
+        ? SeedWizardScreen(onSeedApplied: () => setState(() {}))
+        : widget.child;
+  }
+}
+
+class SeedWizardScreen extends StatefulWidget {
+  final void Function() onSeedApplied;
+
+  const SeedWizardScreen({Key key, this.onSeedApplied}) : super(key: key);
+
+  @override
+  _SeedWizardScreenState createState() => _SeedWizardScreenState();
+}
+
+class _SeedWizardScreenState extends State<SeedWizardScreen> {
+  int wizardStep = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    switch (wizardStep) {
+      case 0:
+        return _WizardStep1(
+          next: () => setState(() {
+            wizardStep++;
+          }),
+        );
+      case 1:
+        return _WizardStep2(
+          back: () => setState(() {
+            wizardStep--;
+          }),
+          next: () => setState(() {
+            wizardStep++;
+          }),
+        );
+    }
+
+    assert(false);
+    return Container();
+  }
+}
+
+// It's just a Welcome screen with app description
+class _WizardStep1 extends StatelessWidget {
+  final void Function() next;
+
+  const _WizardStep1({Key key, @required this.next}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final lzn = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(lzn.seedWizard)),
-      body: SingleChildScrollView(
-        child: Container(
-          constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height - 80),
-          child: Card(
+      appBar: AppBar(
+        title: Text('Privace Contacts Wizard'),
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 20),
-                      _topSection(context),
-                      SizedBox(height: 20),
-                      _introSection(context),
-                      SizedBox(height: 20),
-                    ],
-                  ),
+                SizedBox(height: 16),
+                CenterText(
+                  lzn.welcome,
+                  style: Theme.of(context).textTheme.headline,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Text(
-                        lzn.haveYouSeed,
-                        style: Theme.of(context).textTheme.subhead,
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    _actions(context),
-                  ],
-                ),
+                SizedBox(height: 16),
+                Paragraph(lzn.wizardIntro),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _topSection(BuildContext context) {
-    final lzn = AppLocalizations.of(context);
-
-    return Text(
-      lzn.welcome,
-      style: Theme.of(context).textTheme.headline,
-    );
-  }
-
-  Widget _introSection(BuildContext context) {
-    final lzn = AppLocalizations.of(context);
-
-    return Paragraph(lzn.wizardIntro);
-  }
-
-  Widget _actions(BuildContext context) {
-    final lzn = AppLocalizations.of(context);
-
-    return ButtonBar(
-      alignment: MainAxisAlignment.end,
-      children: <Widget>[
+      persistentFooterButtons: <Widget>[
         RaisedButton(
-          child: Text(lzn.alreadyHaveSeed),
-          onPressed: () => print('have'),
-        ),
-        RaisedButton(
-          color: Colors.amber[800],
-          child: Text(lzn.createNewSeed),
-          onPressed: () => print('open contact'),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 48),
+            child: Text(lzn.next),
+          ),
+          onPressed: next,
         )
       ],
     );
+  }
+}
+
+/// Ask user a question screen: Have you a seed-phrase?
+class _WizardStep2 extends StatelessWidget {
+  final void Function() back;
+  final void Function() next;
+
+  const _WizardStep2({Key key, @required this.back, @required this.next})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    /*
+
+                CenterText(
+                  lzn.haveYouSeed,
+                  style: Theme.of(context).textTheme.headline,
+                ),
+
+    RaisedButton(
+      child: Text(lzn.alreadyHaveSeed),
+      onPressed: back,
+    ),
+    RaisedButton(
+    color: Colors.amber[800],
+    child: Text(lzn.createNewSeed),
+    onPressed: next,
+    )*/
+    return Container();
   }
 }
 
@@ -151,7 +204,7 @@ class WizardCreateSeedScreen extends StatelessWidget {
       children: <Widget>[
         RaisedButton(
           child: Text(lzn.recreate),
-          onPressed: () => mnemonicModel.request(),
+          onPressed: () => null,
         ),
         RaisedButton(
           color: Colors.amber[800],
@@ -166,18 +219,18 @@ class WizardCreateSeedScreen extends StatelessWidget {
 class MnemonicCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    mnemonicModel.request();
+    return Center(child: CircularProgressIndicator());
 
-    return StreamBuilder<MnemonicGeneratorState>(
-      stream: mnemonicModel.state,
-      initialData: MnemonicGeneratorLoadingState(),
+    //mnemonicModel.request();
+    return StreamBuilder(
+      stream: null,
       builder: (ctx, snapshot) {
         if (snapshot.hasData) {
           final data = snapshot.data;
 
-          if (data is MnemonicGeneratorResultState) {
+          /*if (data is MnemonicGeneratorResultState) {
             return _mnemonic(ctx, data.mnemonic);
-          }
+          }*/
 
           return Center(child: CircularProgressIndicator());
         }

@@ -3,7 +3,7 @@
 // Also read license file that can be found in the LICENSE file.
 
 import 'package:contacts/models/app.dart';
-import 'package:contacts/widgets/contacts.dart';
+import 'package:contacts/ui/contacts.dart';
 import 'package:flutter/material.dart';
 
 class ContactsScreen extends StatelessWidget {
